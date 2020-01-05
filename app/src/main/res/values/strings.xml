@@ -1,3 +1,15 @@
 <resources>
-    <string name="app_name">YourNeoWeather</string>
+    <string name="app_name">WeatherApp</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_settings">Settings</string>
+
+    <string name="nav_header_desc">Navigation Description</string>
+    <string name="nav_header_title">User Name Weather Application</string>
+
+    <string name="hello_blank_fragment">Work in progress</string>
+    <string name="home_weather_icon">Weather Conditions Icon</string>
+    <string name="home_humidity_icon">Humidity Icon</string>
+    <string name="home_degrees_icon">Degrees Icon</string>
+    <string name="home_wind_icon">Windy Icon</string>
 </resources>
