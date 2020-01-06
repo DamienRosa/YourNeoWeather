@@ -3,7 +3,7 @@ package com.dgr.domain.repository
 import com.dgr.domain.entity.CityWeather
 
 class CityRepository(private val cityDataSource: CityDataSource) {
-    suspend fun getCities() = cityDataSource.getCities()
+    suspend fun getCities(forcedLoad: Boolean) = cityDataSource.getCities(forcedLoad)
 
     suspend fun addCity(city: CityWeather) = cityDataSource.addCity(city)
 

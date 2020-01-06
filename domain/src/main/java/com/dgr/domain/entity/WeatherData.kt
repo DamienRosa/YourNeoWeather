@@ -1,16 +1,17 @@
 package com.dgr.domain.entity
 
 data class WeatherData(
-    val base: String,
-    val clouds: Clouds,
-    val cod: Int,
-    val coord: Coord,
-    val dt: Int,
-    val id: Int,
-    val main: Main,
-    val name: String,
-    val sys: Sys,
+    val city : String,
+    val country : String,
+    val description : String,
+    val temperature : Double,
+    val pressure : Int,
+    val humidity : Int,
+    val windSpeed : Double,
+    val windDirection: String,
     val visibility: Int,
-    val weather: List<Weather>,
-    val wind: Wind
+    val sunset: Int,
+    val sunrise: Int,
+    val lastUpdateDate: String? = "",
+    val weatherIcon: String? = ""
 )
