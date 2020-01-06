@@ -15,7 +15,7 @@ class HomeViewModel(private val getCitiesUseCase: GetCitiesUseCase) : ViewModel(
 
     fun loadData() {
         viewModelScope.launch {
-            getCitiesUseCase.invoke().also {
+            getCitiesUseCase.invoke(false).also {
                 if (it.isNotEmpty()) {
                     mViewState.value = ViewState(
                         isLoading = false,

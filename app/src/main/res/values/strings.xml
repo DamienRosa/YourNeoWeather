@@ -8,8 +8,14 @@
     <string name="nav_header_title">User Name Weather Application</string>
 
     <string name="hello_blank_fragment">Work in progress</string>
+
     <string name="home_weather_icon">Weather Conditions Icon</string>
     <string name="home_humidity_icon">Humidity Icon</string>
     <string name="home_degrees_icon">Degrees Icon</string>
     <string name="home_wind_icon">Windy Icon</string>
+
+    <string name="search_city_city_name_hint">Search for a city</string>
+    <string name="search_city_map_coming_soon">Map coming soon</string>
+    <string name="search_city_search">Search</string>
+    <string name="search_city_title">Search City</string>
 </resources>
