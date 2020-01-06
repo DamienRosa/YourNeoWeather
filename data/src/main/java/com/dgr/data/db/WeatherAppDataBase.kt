@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.dgr.data.BuildConfig
 import com.dgr.data.db.dao.CityWeatherDao
-import com.dgr.data.entity.CityEntity
+import com.dgr.data.db.entity.CityEntity
 
 @Database(entities = [CityEntity::class], version = 1)
 abstract class WeatherAppDataBase : RoomDatabase() {

@@ -4,9 +4,12 @@ import com.dgr.data.db.WeatherAppDataBase
 import com.dgr.domain.entity.CityWeather
 import com.dgr.domain.repository.CityDataSource
 
-class LocalCityWeatherRepository(private val dataBase: WeatherAppDataBase) : CityDataSource {
-    override suspend fun getCities(): List<CityWeather> {
-        return mockedData()
+class CityWeatherRepository(private val dataBase: WeatherAppDataBase) : CityDataSource {
+
+    override suspend fun getCities(forceLoad: Boolean): List<CityWeather> {
+        val response = dataBase.getCityDao().getCities()
+
+        return toMapper() ?: emptyList()
     }
 
     override suspend fun addCity(city: CityWeather) {
@@ -39,4 +42,8 @@ class LocalCityWeatherRepository(private val dataBase: WeatherAppDataBase) : Cit
             "12/12/12"
         )
     )
+
+    private fun toMapper(): List<CityWeather>? = emptyList()
 }
+
+

@@ -12,6 +12,7 @@ buildscript {
     ext.kandroid_version = '0.8.8@aar'
     ext.coroutines_version = '1.2.1'
     ext.room_version = '2.2.3'
+    ext.retrofit_version = '2.6.0'
 
     repositories {
         google()
