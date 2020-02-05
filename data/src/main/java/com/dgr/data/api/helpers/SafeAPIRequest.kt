@@ -1,4 +1,4 @@
-package com.dgr.data.api
+package com.dgr.data.api.helpers
 
 import android.util.Log
 import retrofit2.Response

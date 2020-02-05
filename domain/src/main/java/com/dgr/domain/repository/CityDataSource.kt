@@ -1,10 +1,10 @@
 package com.dgr.domain.repository
 
-import com.dgr.domain.entity.CityWeather
+import com.dgr.domain.entity.WeatherDomain
 
 interface CityDataSource {
-    suspend fun getCities(forceLoad: Boolean) : List<CityWeather>
-    suspend fun addCity(city: CityWeather)
-    suspend fun removeCity(city: CityWeather)
-    suspend fun updateCity(city: CityWeather)
+    suspend fun getCities(forceLoad: Boolean) : List<WeatherDomain>
+    suspend fun addCity(city: WeatherDomain)
+    suspend fun removeCity(city: WeatherDomain)
+    suspend fun updateCity(city: WeatherDomain)
 }

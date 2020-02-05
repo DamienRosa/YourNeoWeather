@@ -5,7 +5,19 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class CityEntity(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     val id: Int,
-    val name: String
+    val city : String,
+    val country : String,
+    val description : String,
+    val temperature : Double,
+    val pressure : Int,
+    val humidity : Int,
+    val windSpeed : Double,
+    val windDirection: String,
+    val visibility: Int,
+    val sunset: Int,
+    val sunrise: Int,
+    val lastUpdateDate: String? = "",
+    val weatherIcon: String? = ""
 )

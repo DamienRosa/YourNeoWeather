@@ -1,8 +1,8 @@
 package com.dgr.domain.usecase
 
-import com.dgr.domain.entity.CityWeather
-import com.dgr.domain.repository.CityRepository
+import com.dgr.domain.entity.WeatherDomain
+import com.dgr.domain.repository.CityDomainRepository
 
-class AddCityUseCase(private val cityRepository: CityRepository) {
-    suspend operator fun invoke(city: CityWeather) = cityRepository.addCity(city)
+class AddCityUseCase(private val cityDomainRepository: CityDomainRepository) {
+    suspend operator fun invoke(city: WeatherDomain) = cityDomainRepository.addCity(city)
 }

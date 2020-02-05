@@ -1,36 +1,33 @@
 package com.dgr.yourneoweather.ui.weatherdetails
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.navArgs
-
 import com.dgr.yourneoweather.R
+import com.dgr.yourneoweather.common.ui.BaseFragment
+import kotlinx.android.synthetic.main.weather_details_fragment.*
+import org.kodein.di.generic.instance
 
-class WeatherDetailsFragment : Fragment() {
+class WeatherDetailsFragment : BaseFragment() {
 
-    companion object {
-        fun newInstance() = WeatherDetailsFragment()
-    }
+    private val viewModel: WeatherDetailsViewModel by instance()
 
-    private lateinit var viewModel: WeatherDetailsViewModel
+    private val args: WeatherDetailsFragmentArgs by navArgs()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.weather_details_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(WeatherDetailsViewModel::class.java)
 
-        // TODO: Use the ViewModel
+        btn_save.setOnClickListener {
+            viewModel.saveCityWeather(args.weatherDetails)
+        }
     }
 
 }

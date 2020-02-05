@@ -1,6 +1,6 @@
 package com.dgr.domain.entity
 
-data class WeatherData(
+data class WeatherDomain(
     val city : String,
     val country : String,
     val description : String,

@@ -4,9 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.dgr.domain.entity.CityWeather
+import com.dgr.domain.entity.WeatherDomain
 import com.dgr.domain.usecase.GetCitiesUseCase
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class HomeViewModel(private val getCitiesUseCase: GetCitiesUseCase) : ViewModel() {
 
@@ -15,7 +17,10 @@ class HomeViewModel(private val getCitiesUseCase: GetCitiesUseCase) : ViewModel(
 
     fun loadData() {
         viewModelScope.launch {
-            getCitiesUseCase.invoke(false).also {
+            val response = withContext(Dispatchers.IO) {
+                getCitiesUseCase.invoke(false)
+            }
+            response.also {
                 if (it.isNotEmpty()) {
                     mViewState.value = ViewState(
                         isLoading = false,
@@ -36,6 +41,6 @@ class HomeViewModel(private val getCitiesUseCase: GetCitiesUseCase) : ViewModel(
     data class ViewState(
         val isLoading: Boolean = true,
         val isError: Boolean = false,
-        val citiesList: List<CityWeather> = emptyList()
+        val citiesList: List<WeatherDomain> = emptyList()
     )
 }

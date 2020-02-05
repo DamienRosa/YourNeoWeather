@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.dgr.domain.entity.CityWeather" />
+            type="com.dgr.domain.entity.WeatherDomain" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -23,7 +23,7 @@
             style="@style/TextAppearance.MaterialComponents.Headline5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{viewModel.name}"
+            android:text="@{viewModel.city}"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Warsaw" />
@@ -84,7 +84,7 @@
             style="@style/TextAppearance.MaterialComponents.Body1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{viewModel.humidity}"
+            android:text="@{Integer.toString(viewModel.humidity)}"
             app:layout_constraintBottom_toBottomOf="@+id/iv_humidity_label"
             app:layout_constraintStart_toEndOf="@+id/iv_humidity_label"
             app:layout_constraintTop_toTopOf="@+id/iv_humidity_label"

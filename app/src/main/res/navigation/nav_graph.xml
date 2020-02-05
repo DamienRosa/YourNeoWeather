@@ -36,9 +36,9 @@
         android:name="com.dgr.yourneoweather.ui.weatherdetails.WeatherDetailsFragment"
         android:label="weather_details_fragment"
         tools:layout="@layout/weather_details_fragment">
-<!--        <argument-->
-<!--            android:name="weatherDetails"-->
-<!--            app:argType="com.dgr.domain.entity.WeatherData" />-->
+        <argument
+            android:name="weatherDetails"
+            app:argType="com.dgr.yourneoweather.common.model.WeatherUI" />
     </fragment>
 
 </navigation>

@@ -1,7 +1,7 @@
 package com.dgr.domain.usecase
 
-import com.dgr.domain.repository.CityRepository
+import com.dgr.domain.repository.CityDomainRepository
 
-class GetCitiesUseCase(private val cityRepository: CityRepository) {
-    suspend operator fun invoke(forcedLoad: Boolean) = cityRepository.getCities(forcedLoad)
+class GetCitiesUseCase(private val cityDomainRepository: CityDomainRepository) {
+    suspend operator fun invoke(forcedLoad: Boolean) = cityDomainRepository.getCities(forcedLoad)
 }

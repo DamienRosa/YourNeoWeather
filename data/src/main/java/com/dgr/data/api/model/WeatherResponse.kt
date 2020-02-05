@@ -1,6 +1,6 @@
 package com.dgr.data.api.model
 
-import com.dgr.domain.entity.WeatherData
+import com.dgr.domain.entity.WeatherDomain
 
 data class WeatherResponse(
     val base: String,
@@ -22,8 +22,8 @@ data class WeatherResponse(
         }
 }
 
-fun WeatherResponse.toDomainModel() : WeatherData =
-    WeatherData(
+fun WeatherResponse.toDomainModel() : WeatherDomain =
+    WeatherDomain(
         city = this.name,
         country = this.sys.country,
         description = this.weather[0].description,

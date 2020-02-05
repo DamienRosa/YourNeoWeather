@@ -1,4 +1,4 @@
-package com.dgr.data.api
+package com.dgr.data.api.helpers
 
 import com.dgr.data.BuildConfig
 import okhttp3.Interceptor

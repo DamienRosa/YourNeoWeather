@@ -7,7 +7,6 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.0"
 
-
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 29
@@ -47,9 +46,11 @@ dependencies {
     implementation "androidx.room:room-ktx:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
 
-    // Retrofit and GSON
+    // Retrofit, GSON and logging interceptor
     api "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttp"
+
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

@@ -1,4 +1,4 @@
-package com.dgr.data.api
+package com.dgr.data.api.helpers
 
 sealed class Result<out R> {
 
