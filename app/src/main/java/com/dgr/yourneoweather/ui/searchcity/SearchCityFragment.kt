@@ -22,10 +22,7 @@ class SearchCityFragment : BaseFragment() {
 
     private val viewModel: SearchCityViewModel by instance()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.search_city_fragment, container, false)
     }
 
