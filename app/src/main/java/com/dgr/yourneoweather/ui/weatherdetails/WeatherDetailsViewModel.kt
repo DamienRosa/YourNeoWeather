@@ -2,34 +2,19 @@ package com.dgr.yourneoweather.ui.weatherdetails
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.dgr.domain.entity.WeatherDomain
 import com.dgr.domain.usecase.AddCityUseCase
-import com.dgr.yourneoweather.common.model.WeatherUI
+import com.dgr.yourneoweather.mapper.UIModelMapper
+import com.dgr.yourneoweather.model.WeatherUI
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class WeatherDetailsViewModel(private val addCityUseCase: AddCityUseCase) : ViewModel() {
+class WeatherDetailsViewModel(
+    private val addCityUseCase: AddCityUseCase,
+    private val modelMapper: UIModelMapper) : ViewModel() {
 
     fun saveCityWeather(weatherDetails: WeatherUI) {
         viewModelScope.launch(Dispatchers.IO) {
-            addCityUseCase.invoke(weatherDetails.toCityModel())
+            addCityUseCase.invoke(modelMapper.toDomainModel(weatherDetails))
         }
     }
-
-    private fun WeatherUI.toCityModel(): WeatherDomain =
-        WeatherDomain(
-            city = this.city,
-            country = this.country,
-            description = this.description,
-            windSpeed = this.windSpeed,
-            windDirection = this.windDirection,
-            temperature = this.temperature,
-            humidity = this.humidity,
-            pressure = this.pressure,
-            visibility = this.visibility,
-            sunrise = this.sunrise,
-            sunset = this.sunset,
-            weatherIcon = this.weatherIcon,
-            lastUpdateDate = this.lastUpdateDate
-        )
 }

@@ -10,11 +10,14 @@ import com.dgr.data.db.repository.LocalWeatherRepository
 import com.dgr.data.repository.CityWeatherDataRepository
 import com.dgr.data.repository.WeatherDataRepository
 import com.dgr.domain.repository.CityDomainRepository
+import com.dgr.domain.repository.WeatherDomainRepository
 import com.dgr.domain.usecase.AddCityUseCase
 import com.dgr.domain.usecase.GetCitiesUseCase
 import com.dgr.domain.usecase.GetForecastUseCase
 import com.dgr.domain.usecase.GetWeatherUseCase
+import com.dgr.yourneoweather.adapter.CityAdapter
 import com.dgr.yourneoweather.common.ui.BaseViewModelProvider
+import com.dgr.yourneoweather.mapper.UIModelMapper
 import com.dgr.yourneoweather.ui.home.HomeViewModel
 import com.dgr.yourneoweather.ui.searchcity.SearchCityViewModel
 import com.dgr.yourneoweather.ui.weatherdetails.WeatherDetailsViewModel
@@ -42,7 +45,7 @@ class WeatherAppApplication : Application(), KodeinAware {
         bind() from singleton { CityWeatherDataRepository(instance()) }
         bind() from singleton { WeatherDataRepository(instance(), instance()) }
 
-        bind() from singleton { com.dgr.domain.repository.WeatherDomainRepository(instance()) }
+        bind() from singleton { WeatherDomainRepository(instance()) }
         bind() from singleton { CityDomainRepository(instance()) }
 
         bind() from singleton { GetCitiesUseCase(instance()) }
@@ -50,16 +53,20 @@ class WeatherAppApplication : Application(), KodeinAware {
         bind() from singleton { GetForecastUseCase(instance()) }
         bind() from singleton { AddCityUseCase(instance()) }
 
+        bind() from singleton { UIModelMapper() }
+
+        bind() from singleton { CityAdapter(instance()) }
+
         bind<HomeViewModel>() with scoped<Fragment>(AndroidLifecycleScope).singleton {
-            BaseViewModelProvider.of(context) { HomeViewModel(instance()) }
+            BaseViewModelProvider.of(context) { HomeViewModel(instance(), instance()) }
         }
 
         bind<SearchCityViewModel>() with scoped<Fragment>(AndroidLifecycleScope).singleton {
-            BaseViewModelProvider.of(context) { SearchCityViewModel(instance()) }
+            BaseViewModelProvider.of(context) { SearchCityViewModel(instance(), instance()) }
         }
 
         bind<WeatherDetailsViewModel>() with scoped<Fragment>(AndroidLifecycleScope).singleton {
-            BaseViewModelProvider.of(context) { WeatherDetailsViewModel(instance()) }
+            BaseViewModelProvider.of(context) { WeatherDetailsViewModel(instance(), instance()) }
         }
     }
 }

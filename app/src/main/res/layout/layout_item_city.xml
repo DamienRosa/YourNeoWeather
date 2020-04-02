@@ -1,113 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/spacing_16"
+    android:layout_marginTop="@dimen/spacing_8"
+    android:layout_marginEnd="@dimen/spacing_16"
+    android:layout_marginBottom="@dimen/spacing_8"
+    android:background="@drawable/shape_round_white_shadowed"
+    android:elevation="@dimen/spacing_8"
+    android:orientation="vertical"
+    android:padding="@dimen/spacing_16">
 
-    <data>
-        <variable
-            name="viewModel"
-            type="com.dgr.domain.entity.WeatherDomain" />
-    </data>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/tv_city_name"
+        style="@style/TextAppearance.MaterialComponents.Headline5"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing_16"
-        android:background="@drawable/shape_round_white_shadowed"
-        android:elevation="@dimen/spacing_8"
-        android:orientation="vertical"
-        android:padding="@dimen/spacing_16">
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Warsaw" />
 
-        <TextView
-            android:id="@+id/tv_city_name"
-            style="@style/TextAppearance.MaterialComponents.Headline5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{viewModel.city}"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Warsaw" />
+    <TextView
+        android:id="@+id/tv_city_country"
+        style="@style/TextAppearance.MaterialComponents.Overline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_4"
+        app:layout_constraintStart_toStartOf="@+id/tv_city_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_city_name"
+        tools:text="Warsaw" />
 
-        <TextView
-            android:id="@+id/tv_city_country"
-            style="@style/TextAppearance.MaterialComponents.Overline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_4"
-            android:text="@{viewModel.country}"
-            app:layout_constraintStart_toStartOf="@+id/tv_city_name"
-            app:layout_constraintTop_toBottomOf="@+id/tv_city_name"
-            tools:text="Warsaw" />
+    <TextView
+        android:id="@+id/tv_temperature"
+        style="@style/TextAppearance.MaterialComponents.Headline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_8"
+        android:gravity="bottom"
+        app:layout_constraintStart_toStartOf="@+id/tv_city_country"
+        app:layout_constraintTop_toBottomOf="@+id/tv_city_country"
+        tools:text="23" />
 
-        <TextView
-            android:id="@+id/tv_temperature"
-            style="@style/TextAppearance.MaterialComponents.Headline2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_8"
-            android:gravity="bottom"
-            android:text="@{Double.toString(viewModel.temperature)}"
-            app:layout_constraintStart_toStartOf="@+id/tv_city_country"
-            app:layout_constraintTop_toBottomOf="@+id/tv_city_country"
-            tools:text="23" />
+    <ImageView
+        android:id="@+id/iv_degrees_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/home_degrees_icon"
+        android:src="@drawable/ic_celsius"
+        app:layout_constraintBottom_toTopOf="@+id/iv_wind_direction"
+        app:layout_constraintStart_toEndOf="@+id/tv_temperature" />
 
-        <ImageView
-            android:id="@+id/iv_degrees_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/home_degrees_icon"
-            android:src="@drawable/ic_celsius"
-            app:layout_constraintBottom_toTopOf="@+id/tv_wind_label"
-            app:layout_constraintStart_toEndOf="@+id/tv_temperature" />
+    <ImageView
+        android:id="@+id/iv_wind_direction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_8"
+        android:contentDescription="@string/home_wind_icon"
+        tools:src="@drawable/ic_direction_down"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_temperature"
+        app:layout_constraintStart_toEndOf="@+id/tv_temperature" />
 
-        <ImageView
-            android:id="@+id/tv_wind_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/spacing_8"
-            android:contentDescription="@string/home_wind_icon"
-            android:src="@drawable/ic_direction_down"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_temperature"
-            app:layout_constraintStart_toEndOf="@+id/tv_temperature" />
+    <ImageView
+        android:id="@+id/iv_humidity_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/home_humidity_icon"
+        android:src="@drawable/ic_umbrella"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_wind_direction"
+        app:layout_constraintStart_toEndOf="@+id/iv_wind_direction" />
 
-        <ImageView
-            android:id="@+id/iv_humidity_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/home_humidity_icon"
-            android:src="@drawable/ic_umbrella"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_wind_label"
-            app:layout_constraintStart_toEndOf="@+id/tv_wind_label" />
+    <TextView
+        android:id="@+id/tv_humidity"
+        style="@style/TextAppearance.MaterialComponents.Body1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_humidity_label"
+        app:layout_constraintStart_toEndOf="@+id/iv_humidity_label"
+        app:layout_constraintTop_toTopOf="@+id/iv_humidity_label"
+        tools:text="78 %" />
 
-        <TextView
-            android:id="@+id/tv_humidity"
-            style="@style/TextAppearance.MaterialComponents.Body1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{Integer.toString(viewModel.humidity)}"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_humidity_label"
-            app:layout_constraintStart_toEndOf="@+id/iv_humidity_label"
-            app:layout_constraintTop_toTopOf="@+id/iv_humidity_label"
-            tools:text="78 %" />
+    <ImageView
+        android:id="@+id/iv_weather"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/home_weather_icon"
+        app:layout_constraintBottom_toTopOf="@+id/tv_last_update_date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_city_name"
+        app:layout_constraintVertical_bias="0.0"
+        android:src="@mipmap/ic_launcher" />
 
-        <ImageView
-            android:id="@+id/iv_weather"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/home_weather_icon"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tv_city_name"
-            tools:src="@mipmap/ic_launcher" />
+    <TextView
+        android:id="@+id/tv_last_update_date"
+        style="@style/TextAppearance.MaterialComponents.Caption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_humidity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/tv_humidity"
+        app:layout_constraintTop_toTopOf="@+id/tv_humidity"
+        tools:text="Last update\n12/12/2020 5:20"
+        android:textAlignment="textEnd"
+        android:lines="2"/>
 
-        <TextView
-            android:id="@+id/tv_last_update_date"
-            style="@style/TextAppearance.MaterialComponents.Caption"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{viewModel.lastUpdateDate}"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_wind_label"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:text="Last update: 12/12/2020" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,14 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.dgr.domain.entity.WeatherDomain
 import com.dgr.yourneoweather.R
-import com.dgr.yourneoweather.common.model.WeatherUI
 import com.dgr.yourneoweather.common.extensions.observe
 import com.dgr.yourneoweather.common.ui.BaseFragment
-import com.google.android.material.snackbar.Snackbar
+import com.dgr.yourneoweather.model.WeatherUI
 import com.pawegio.kandroid.inputMethodManager
 import com.pawegio.kandroid.visible
 import kotlinx.android.synthetic.main.layout_progress_bar.*
@@ -22,9 +21,8 @@ class SearchCityFragment : BaseFragment() {
 
     private val viewModel: SearchCityViewModel by instance()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.search_city_fragment, container, false)
-    }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+        inflater.inflate(R.layout.search_city_fragment, container, false)
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -35,7 +33,7 @@ class SearchCityFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         observe(viewModel.isLoading, observerLoading())
-        observe(viewModel.isError, observerError(view))
+        observe(viewModel.isError, observerError())
         observe(viewModel.weatherDomain, observerWeatherData())
     }
 
@@ -46,39 +44,22 @@ class SearchCityFragment : BaseFragment() {
         }
     }
 
-    private fun observerWeatherData(): Observer<WeatherDomain> = Observer {
+    private fun observerWeatherData(): Observer<WeatherUI> = Observer {
         if (it != null) {
             findNavController().navigate(
-                SearchCityFragmentDirections.actionSearchCityFragmentToWeatherDetailsFragment(it.toParcelModel())
+                SearchCityFragmentDirections.actionSearchCityFragmentToWeatherDetailsFragment(it)
             )
             viewModel.setModel(null)
         }
     }
 
-    private fun observerError(view: View): Observer<Boolean> = Observer {
+    private fun observerError(): Observer<Boolean> = Observer {
         if (it) {
-            Snackbar.make(view, "There was some error", Snackbar.LENGTH_LONG).show()
+            Toast.makeText(activity, "There was some error", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun observerLoading(): Observer<Boolean> = Observer {
         cl_progress_bar.visible = it
     }
-
-    private fun WeatherDomain.toParcelModel(): WeatherUI =
-        WeatherUI(
-            city = this.city,
-            country = this.country,
-            description = this.description,
-            windSpeed = this.windSpeed,
-            windDirection = this.windDirection,
-            temperature = this.temperature,
-            humidity = this.humidity,
-            pressure = this.pressure,
-            visibility = this.visibility,
-            sunrise = this.sunrise,
-            sunset = this.sunset,
-            weatherIcon = this.weatherIcon,
-            lastUpdateDate = this.lastUpdateDate
-        )
 }

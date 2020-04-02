@@ -26,13 +26,13 @@ interface OpenWeatherApi {
             val interceptor = HttpLoggingInterceptor()
             interceptor.level = HttpLoggingInterceptor.Level.BODY
             val okHttpClient = createOkHttpClient(networkConnectionInterceptor, interceptor)
-            return createRetrofit(okHttpClient, BASE_API_URL)
+            return createRetrofit(okHttpClient)
         }
 
-        private fun createRetrofit(httpClient: OkHttpClient, url: String): OpenWeatherApi =
+        private fun createRetrofit(httpClient: OkHttpClient): OpenWeatherApi =
             Retrofit.Builder()
                 .client(httpClient)
-                .baseUrl(url)
+                .baseUrl(BASE_API_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(OpenWeatherApi::class.java)

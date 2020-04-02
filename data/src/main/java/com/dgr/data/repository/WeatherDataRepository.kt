@@ -1,8 +1,8 @@
 package com.dgr.data.repository
 
-import com.dgr.data.api.repository.RemoteWeatherRepository
 import com.dgr.data.api.helpers.Result
 import com.dgr.data.api.model.toDomainModel
+import com.dgr.data.api.repository.RemoteWeatherRepository
 import com.dgr.data.db.repository.LocalWeatherRepository
 import com.dgr.domain.entity.ForecastDomain
 import com.dgr.domain.entity.WeatherDomain
@@ -23,6 +23,6 @@ class WeatherDataRepository(
     }
 
     override suspend fun getForecast(city: String): ForecastDomain {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 }

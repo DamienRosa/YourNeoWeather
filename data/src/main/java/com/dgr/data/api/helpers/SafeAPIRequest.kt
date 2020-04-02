@@ -7,7 +7,7 @@ abstract class SafeAPIRequest {
     suspend fun <T : Any> apiRequest(call: suspend () -> Response<T>): Result<T> {
         val response = call.invoke()
         return if (response.isSuccessful) {
-            val result =  response.body()
+            val result = response.body()
             Log.i("SafeAPIRequest SUCCESS", result.toString())
             Result.Success(result!!)
         } else {

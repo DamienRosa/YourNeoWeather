@@ -15,26 +15,20 @@ data class WeatherResponse(
     val visibility: Int,
     val weather: List<Weather>,
     val wind: Wind
-) {
-    fun toIcon(): String? =
-        when(this.weather[0].icon){
-            else -> ""
-        }
-}
+)
 
-fun WeatherResponse.toDomainModel() : WeatherDomain =
+fun WeatherResponse.toDomainModel(): WeatherDomain =
     WeatherDomain(
         city = this.name,
         country = this.sys.country,
         description = this.weather[0].description,
         windSpeed = this.wind.speed,
-        windDirection = this.wind.toSpeedDirection(),
+        windDirection = this.wind.deg,
         temperature = this.main.temp,
         humidity = this.main.humidity,
         pressure = this.main.pressure,
         visibility = this.visibility,
         sunrise = this.sys.sunrise,
         sunset = this.sys.sunset,
-        weatherIcon = this.toIcon()
+        weatherIcon = this.weather[0].id
     )
-

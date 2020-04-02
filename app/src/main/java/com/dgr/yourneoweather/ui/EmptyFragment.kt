@@ -10,7 +10,9 @@ import com.dgr.yourneoweather.R
 class EmptyFragment : Fragment() {
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? =
         inflater.inflate(R.layout.fragment_empty, container, false)
 }

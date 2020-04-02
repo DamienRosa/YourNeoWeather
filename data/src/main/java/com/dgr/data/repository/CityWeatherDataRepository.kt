@@ -7,9 +7,9 @@ import com.dgr.domain.repository.CityDataSource
 
 class CityWeatherDataRepository(private val dataBase: WeatherAppDataBase) : CityDataSource {
 
-    override suspend fun getCities(forceLoad: Boolean): List<WeatherDomain> {
+    override suspend fun getCities(): List<WeatherDomain> {
         val response = dataBase.getCityDao().getCities()
-        return response.toMapper()
+        return response.toDomainModel()
     }
 
     override suspend fun addCity(city: WeatherDomain) {
@@ -17,11 +17,11 @@ class CityWeatherDataRepository(private val dataBase: WeatherAppDataBase) : City
     }
 
     override suspend fun removeCity(city: WeatherDomain) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
     override suspend fun updateCity(city: WeatherDomain) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
     private fun WeatherDomain.toDbModel(): CityEntity =
@@ -42,7 +42,7 @@ class CityWeatherDataRepository(private val dataBase: WeatherAppDataBase) : City
             windSpeed = this.windSpeed
         )
 
-    private fun List<CityEntity>.toMapper(): List<WeatherDomain> =
+    private fun List<CityEntity>.toDomainModel(): List<WeatherDomain> =
         this.map { city -> WeatherDomain(
             city = city.city,
             country = city.country,
@@ -59,5 +59,3 @@ class CityWeatherDataRepository(private val dataBase: WeatherAppDataBase) : City
             lastUpdateDate = city.lastUpdateDate
         ) }
 }
-
-

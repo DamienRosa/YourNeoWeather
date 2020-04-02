@@ -18,4 +18,15 @@
     <string name="search_city_map_coming_soon">Map coming soon</string>
     <string name="search_city_search">Search</string>
     <string name="search_city_title">Search City</string>
+    <string name="ui_wind_speed">%1$d km/h</string>
+    <string name="ui_humidity">%1$d %%</string>
+    <string name="ui_pressure">%1$d hPa</string>
+    <string name="ui_last_update_date">Last update\n%1$s</string>
+    <string name="refresh_details_data">refresh details data</string>
+    <string name="home_empty_list">No cities available at the moment</string>]
+
+    <plurals name="ui_visibility">
+        <item quantity="one">%1$d meter</item>
+        <item quantity="other">%1$d meters</item>
+    </plurals>
 </resources>

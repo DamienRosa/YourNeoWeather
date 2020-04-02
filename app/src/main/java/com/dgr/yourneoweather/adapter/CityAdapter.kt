@@ -1,0 +1,59 @@
+package com.dgr.yourneoweather.adapter
+
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import com.dgr.yourneoweather.R
+import com.dgr.yourneoweather.mapper.UIModelMapper
+import com.dgr.yourneoweather.model.WeatherUI
+import kotlinx.android.synthetic.main.layout_item_city.view.*
+
+internal class CityAdapter(private val mapper: UIModelMapper) : RecyclerView.Adapter<CityAdapter.CityViewHolder>() {
+
+    private var cityList: List<WeatherUI> = emptyList()
+
+    override fun getItemCount(): Int = cityList.size
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CityViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
+        return CityViewHolder(inflater.inflate(R.layout.layout_item_city, parent, false), mapper)
+    }
+
+    override fun onBindViewHolder(holder: CityViewHolder, position: Int) {
+        val city = cityList[position]
+        holder.bind(city)
+    }
+
+    class CityViewHolder(itemView: View, mapper: UIModelMapper) : RecyclerView.ViewHolder(itemView) {
+        private val map: UIModelMapper = mapper
+        fun bind(city: WeatherUI) = with(itemView) {
+            itemView.tv_city_name.text = city.city
+            itemView.tv_city_country.text = city.country
+            itemView.tv_temperature.text = city.temperature.toString()
+            itemView.tv_humidity.text =
+                context.resources.getString(
+                    R.string.ui_humidity,
+                    city.humidity
+                )
+            itemView.tv_last_update_date.text =
+                context.resources.getString(
+                    R.string.ui_last_update_date,
+                    city.lastUpdateDate
+                )
+
+            val cardinalImage = map.cardinalDirectionToImage(city.windDirection)
+            itemView.iv_wind_direction.setBackgroundResource(cardinalImage)
+
+            val weatherImage = map.iconIdToImage(city.weatherIcon ?: -1)
+            itemView.iv_weather.setImageResource(weatherImage)
+
+            itemView
+        }
+    }
+
+    fun setCityList(list: List<WeatherUI>) {
+        cityList = list
+        notifyDataSetChanged()
+    }
+}

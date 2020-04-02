@@ -4,19 +4,23 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.dgr.domain.entity.WeatherDomain
 import com.dgr.domain.usecase.GetWeatherUseCase
+import com.dgr.yourneoweather.mapper.UIModelMapper
+import com.dgr.yourneoweather.model.WeatherUI
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class SearchCityViewModel(private val getWeatherUseCase: GetWeatherUseCase) : ViewModel() {
+class SearchCityViewModel(
+    private val getWeatherUseCase: GetWeatherUseCase,
+    private val modelMapper: UIModelMapper
+) : ViewModel() {
 
     private val mIsLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = mIsLoading
 
-    private val mWeatherData = MutableLiveData<WeatherDomain>()
-    val weatherDomain: LiveData<WeatherDomain> = mWeatherData
+    private val mWeatherData = MutableLiveData<WeatherUI>()
+    val weatherDomain: LiveData<WeatherUI> = mWeatherData
 
     private val mIsError = MutableLiveData<Boolean>()
     val isError: LiveData<Boolean> = mIsError
@@ -30,12 +34,14 @@ class SearchCityViewModel(private val getWeatherUseCase: GetWeatherUseCase) : Vi
             response.also {
                 mIsLoading.value = false
                 mIsError.value = it == null
-                mWeatherData.value = it
+                if (it != null) {
+                    mWeatherData.value = modelMapper.toUIModel(it)
+                }
             }
         }
     }
 
-    fun setModel(weatherDomain: WeatherDomain?) {
-        mWeatherData.value = weatherDomain
+    fun setModel(weatherUi: WeatherUI?) {
+        mWeatherData.value = weatherUi
     }
 }

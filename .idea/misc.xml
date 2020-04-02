@@ -11,4 +11,7 @@
   <component name="ProjectType">
     <option name="id" value="Android" />
   </component>
+  <component name="ProtolintService">
+    <option name="executable" value="$USER_HOME$/Downloads/protolint-1.1.4" />
+  </component>
 </project>

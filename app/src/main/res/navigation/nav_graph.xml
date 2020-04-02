@@ -38,7 +38,7 @@
         tools:layout="@layout/weather_details_fragment">
         <argument
             android:name="weatherDetails"
-            app:argType="com.dgr.yourneoweather.common.model.WeatherUI" />
+            app:argType="com.dgr.yourneoweather.model.WeatherUI" />
     </fragment>
 
 </navigation>

@@ -11,7 +11,7 @@ import com.dgr.data.db.entity.CityEntity
 @Database(entities = [CityEntity::class], version = 1)
 abstract class WeatherAppDataBase : RoomDatabase() {
 
-    abstract fun getCityDao() : CityWeatherDao
+    abstract fun getCityDao(): CityWeatherDao
 
     companion object {
         @Volatile
@@ -28,7 +28,8 @@ abstract class WeatherAppDataBase : RoomDatabase() {
             return Room.databaseBuilder(
                 context.applicationContext,
                 WeatherAppDataBase::class.java,
-                BuildConfig.DataBaseName).build()
+                BuildConfig.DataBaseName
+            ).build()
         }
     }
 }

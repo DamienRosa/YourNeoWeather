@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.navArgs
 import com.dgr.yourneoweather.R
 import com.dgr.yourneoweather.common.ui.BaseFragment
@@ -29,5 +27,4 @@ class WeatherDetailsFragment : BaseFragment() {
             viewModel.saveCityWeather(args.weatherDetails)
         }
     }
-
 }

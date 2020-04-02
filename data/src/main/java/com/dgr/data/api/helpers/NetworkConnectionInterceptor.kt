@@ -7,7 +7,7 @@ import okhttp3.Response
 class NetworkConnectionInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
-        val newUrl = request.url().newBuilder()
+        val newUrl = request.url.newBuilder()
             .addQueryParameter("mode", "json")
             .addQueryParameter("units", "metric")
             .addQueryParameter("appid", BuildConfig.OpenWeatherApiKey)

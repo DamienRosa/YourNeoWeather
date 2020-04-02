@@ -26,7 +26,8 @@
         android:src="@drawable/ic_refresh"
         app:layout_constraintBottom_toBottomOf="@+id/tv_last_update_date"
         app:layout_constraintEnd_toStartOf="@+id/tv_last_update_date"
-        app:layout_constraintTop_toTopOf="@+id/tv_last_update_date" />
+        app:layout_constraintTop_toTopOf="@+id/tv_last_update_date"
+        android:contentDescription="@string/refresh_details_data" />
 
     <TextView
         android:id="@+id/tv_city_name"

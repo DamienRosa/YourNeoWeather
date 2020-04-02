@@ -1,4 +1,4 @@
-package com.dgr.yourneoweather.common.model
+package com.dgr.yourneoweather.model
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
@@ -8,14 +8,14 @@ data class WeatherUI(
     val city: String,
     val country: String,
     val description: String,
-    val temperature: Double,
+    val temperature: Int,
     val pressure: Int,
     val humidity: Int,
     val windSpeed: Double,
-    val windDirection: String,
+    val windDirection: Int,
     val visibility: Int,
     val sunset: Int,
     val sunrise: Int,
     val lastUpdateDate: String? = "",
-    val weatherIcon: String? = ""
+    val weatherIcon: Int? = -1
 ) : Parcelable

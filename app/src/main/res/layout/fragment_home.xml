@@ -10,6 +10,8 @@
         android:id="@+id/rv_cities"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingTop="@dimen/spacing_8"
+        android:paddingBottom="@dimen/spacing_8"
         tools:listitem="@layout/layout_item_city" />
 
     <LinearLayout
@@ -23,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="No cities available at the moment" />
+            android:text="@string/home_empty_list" />
 
     </LinearLayout>
 
