@@ -31,16 +31,8 @@ internal class CityAdapter(private val mapper: UIModelMapper) : RecyclerView.Ada
             itemView.tv_city_name.text = city.city
             itemView.tv_city_country.text = city.country
             itemView.tv_temperature.text = city.temperature.toString()
-            itemView.tv_humidity.text =
-                context.resources.getString(
-                    R.string.ui_humidity,
-                    city.humidity
-                )
-            itemView.tv_last_update_date.text =
-                context.resources.getString(
-                    R.string.ui_last_update_date,
-                    city.lastUpdateDate
-                )
+            itemView.tv_humidity.text = context.resources.getString(R.string.ui_humidity, city.humidity)
+            itemView.tv_last_update_date.text = context.resources.getString(R.string.ui_last_update_date, city.lastUpdateDate)
 
             val cardinalImage = map.cardinalDirectionToImage(city.windDirection)
             itemView.iv_wind_direction.setBackgroundResource(cardinalImage)
