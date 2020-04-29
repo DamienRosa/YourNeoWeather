@@ -10,8 +10,6 @@
         android:id="@+id/rv_cities"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="@dimen/spacing_8"
-        android:paddingBottom="@dimen/spacing_8"
         tools:listitem="@layout/layout_item_city" />
 
     <LinearLayout
@@ -19,12 +17,22 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_16"
+        tools:ignore="UseCompoundDrawables">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_na"
+            tools:ignore="ContentDescription" />
 
         <TextView
+            style="@style/TextAppearance.AppCompat.Headline"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:textColor="@color/colorPrimary"
             android:text="@string/home_empty_list" />
 
     </LinearLayout>

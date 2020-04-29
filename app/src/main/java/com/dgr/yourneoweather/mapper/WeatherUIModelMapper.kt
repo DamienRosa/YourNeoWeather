@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import kotlin.math.roundToInt
 
-class UIModelMapper {
+class WeatherUIModelMapper {
 
     fun toUIModel(domainList: List<WeatherDomain>): List<WeatherUI> =
         domainList.map {
@@ -77,9 +77,19 @@ class UIModelMapper {
             else -> -1
         }
 
-    fun iconIdToImage(weatherIcon: Int?): Int =
+    fun iconIdToImage(weatherIcon: Int): Int =
         when (weatherIcon) {
-            804 -> R.drawable.ic_cloudy
+            in 200..232 -> R.drawable.ic_day_lightning
+            in 300..321 -> R.drawable.ic_rain
+            in 500..504 -> R.drawable.ic_day_rain
+            511 -> R.drawable.ic_snowflake_cold
+            in 520..531 -> R.drawable.ic_rain
+            in 600..621 -> R.drawable.ic_snowflake_cold
+            in 701..781 -> R.drawable.ic_dust
+            800 -> R.drawable.ic_day_sunny
+            801 -> R.drawable.ic_day_cloudy
+            802 -> R.drawable.ic_cloud
+            in 803..804 -> R.drawable.ic_cloudy
             else -> R.drawable.ic_na
         }
 }

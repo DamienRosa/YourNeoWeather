@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.dgr.yourneoweather.R
 import com.dgr.yourneoweather.common.extensions.observe
@@ -32,9 +31,9 @@ class SearchCityFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        observe(viewModel.isLoading, observerLoading())
-        observe(viewModel.isError, observerError())
-        observe(viewModel.weatherDomain, observerWeatherData())
+        observe(viewModel.isLoading, ::observerLoading)
+        observe(viewModel.isError, ::observerError)
+        observe(viewModel.weatherDomain, ::observerWeatherData)
     }
 
     private fun setupSearchButton() {
@@ -44,22 +43,22 @@ class SearchCityFragment : BaseFragment() {
         }
     }
 
-    private fun observerWeatherData(): Observer<WeatherUI> = Observer {
-        if (it != null) {
+    private fun observerWeatherData(model: WeatherUI?) {
+        if (model != null) {
             findNavController().navigate(
-                SearchCityFragmentDirections.actionSearchCityFragmentToWeatherDetailsFragment(it)
+                SearchCityFragmentDirections.actionSearchCityFragmentToWeatherDetailsFragment(model)
             )
             viewModel.setModel(null)
         }
     }
 
-    private fun observerError(): Observer<Boolean> = Observer {
-        if (it) {
+    private fun observerError(visibility: Boolean?) {
+        if (visibility!!) {
             Toast.makeText(activity, "There was some error", Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun observerLoading(): Observer<Boolean> = Observer {
-        cl_progress_bar.visible = it
+    private fun observerLoading(visibility: Boolean?) {
+        cl_progress_bar.visible = visibility!!
     }
 }

@@ -23,7 +23,7 @@
     <string name="ui_pressure">%1$d hPa</string>
     <string name="ui_last_update_date">Last update\n%1$s</string>
     <string name="refresh_details_data">refresh details data</string>
-    <string name="home_empty_list">No cities available at the moment</string>]
+    <string name="home_empty_list">No cities marked as favourite, please search for a city and mark it as favourite</string>
 
     <plurals name="ui_visibility">
         <item quantity="one">%1$d meter</item>

@@ -5,11 +5,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dgr.yourneoweather.R
-import com.dgr.yourneoweather.mapper.UIModelMapper
+import com.dgr.yourneoweather.mapper.WeatherUIModelMapper
 import com.dgr.yourneoweather.model.WeatherUI
 import kotlinx.android.synthetic.main.layout_item_city.view.*
 
-internal class CityAdapter(private val mapper: UIModelMapper) : RecyclerView.Adapter<CityAdapter.CityViewHolder>() {
+internal class CityAdapter(private val mapper: WeatherUIModelMapper) : RecyclerView.Adapter<CityAdapter.CityViewHolder>() {
 
     private var cityList: List<WeatherUI> = emptyList()
 
@@ -25,8 +25,8 @@ internal class CityAdapter(private val mapper: UIModelMapper) : RecyclerView.Ada
         holder.bind(city)
     }
 
-    class CityViewHolder(itemView: View, mapper: UIModelMapper) : RecyclerView.ViewHolder(itemView) {
-        private val map: UIModelMapper = mapper
+    class CityViewHolder(itemView: View, mapper: WeatherUIModelMapper) : RecyclerView.ViewHolder(itemView) {
+        private val map: WeatherUIModelMapper = mapper
         fun bind(city: WeatherUI) = with(itemView) {
             itemView.tv_city_name.text = city.city
             itemView.tv_city_country.text = city.country

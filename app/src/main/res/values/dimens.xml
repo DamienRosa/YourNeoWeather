@@ -15,4 +15,7 @@
     <dimen name="button_min_width_64">64dp</dimen>
     <dimen name="button_border_2">2dp</dimen>
 
+    <dimen name="weather_icon_width">100dp</dimen>
+    <dimen name="weather_icon_height">100dp</dimen>
+
 </resources>

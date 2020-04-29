@@ -17,7 +17,7 @@ import com.dgr.domain.usecase.GetForecastUseCase
 import com.dgr.domain.usecase.GetWeatherUseCase
 import com.dgr.yourneoweather.adapter.CityAdapter
 import com.dgr.yourneoweather.common.ui.BaseViewModelProvider
-import com.dgr.yourneoweather.mapper.UIModelMapper
+import com.dgr.yourneoweather.mapper.WeatherUIModelMapper
 import com.dgr.yourneoweather.ui.home.HomeViewModel
 import com.dgr.yourneoweather.ui.searchcity.SearchCityViewModel
 import com.dgr.yourneoweather.ui.weatherdetails.WeatherDetailsViewModel
@@ -53,7 +53,7 @@ class WeatherAppApplication : Application(), KodeinAware {
         bind() from singleton { GetForecastUseCase(instance()) }
         bind() from singleton { AddCityUseCase(instance()) }
 
-        bind() from singleton { UIModelMapper() }
+        bind() from singleton { WeatherUIModelMapper() }
 
         bind() from singleton { CityAdapter(instance()) }
 

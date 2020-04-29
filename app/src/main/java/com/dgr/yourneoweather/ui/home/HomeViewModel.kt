@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dgr.domain.usecase.GetCitiesUseCase
-import com.dgr.yourneoweather.mapper.UIModelMapper
+import com.dgr.yourneoweather.mapper.WeatherUIModelMapper
 import com.dgr.yourneoweather.model.WeatherUI
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -13,15 +13,15 @@ import kotlinx.coroutines.withContext
 
 class HomeViewModel(
     private val getCitiesUseCase: GetCitiesUseCase,
-    private val modelMapper: UIModelMapper
+    private val modelMapper: WeatherUIModelMapper
 ) : ViewModel() {
 
     private val mIsLoading = MutableLiveData<Boolean>()
-    private val mIsError = MutableLiveData<Boolean>()
+    private val mIsEmpty = MutableLiveData<Boolean>()
     private val mCityList = MutableLiveData<List<WeatherUI>>()
 
     fun isLoading(): LiveData<Boolean> = mIsLoading
-    fun isError(): LiveData<Boolean> = mIsError
+    fun isEmpty(): LiveData<Boolean> = mIsEmpty
     fun cityList(): LiveData<List<WeatherUI>> = mCityList
 
     fun loadData() {
@@ -33,7 +33,7 @@ class HomeViewModel(
 
             response.also {
                 mIsLoading.value = false
-                mIsError.value = it.isNullOrEmpty()
+                mIsEmpty.value = it.isNullOrEmpty()
                 mCityList.value = if (it.isNotEmpty()) modelMapper.toUIModel(it) else emptyList()
             }
         }
