@@ -55,7 +55,7 @@ class HomeFragment : BaseFragment() {
 
     private fun observerCitiesList(cities: List<WeatherUI>?) {
         if (cities.isNullOrEmpty()) {
-            Snackbar.make(view!!.findViewById(android.R.id.content), "", Snackbar.LENGTH_SHORT)
+            Snackbar.make(view!!, "", Snackbar.LENGTH_SHORT)
         } else {
             cAdapter.setCityList(cities)
         }

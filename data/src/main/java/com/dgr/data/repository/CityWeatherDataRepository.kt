@@ -26,7 +26,6 @@ class CityWeatherDataRepository(private val dataBase: WeatherAppDataBase) : City
 
     private fun WeatherDomain.toDbModel(): CityEntity =
         CityEntity(
-            id = 0,
             city = this.city,
             weatherIcon = this.weatherIcon,
             temperature = this.temperature,
