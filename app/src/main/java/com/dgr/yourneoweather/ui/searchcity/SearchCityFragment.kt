@@ -5,13 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.dgr.yourneoweather.R
+import com.dgr.yourneoweather.common.extensions.hideKeyboard
 import com.dgr.yourneoweather.common.extensions.observe
 import com.dgr.yourneoweather.common.ui.BaseFragment
 import com.dgr.yourneoweather.model.WeatherUI
-import com.pawegio.kandroid.inputMethodManager
-import com.pawegio.kandroid.visible
 import kotlinx.android.synthetic.main.layout_progress_bar.*
 import kotlinx.android.synthetic.main.search_city_fragment.*
 import org.kodein.di.generic.instance
@@ -30,7 +30,6 @@ class SearchCityFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         observe(viewModel.isLoading, ::observerLoading)
         observe(viewModel.isError, ::observerError)
         observe(viewModel.weatherDomain, ::observerWeatherData)
@@ -39,26 +38,25 @@ class SearchCityFragment : BaseFragment() {
     private fun setupSearchButton() {
         btn_search.setOnClickListener {
             viewModel.getWeather(et_city_name.text.toString())
-            context!!.inputMethodManager!!.hideSoftInputFromWindow(btn_search.windowToken, 0)
+            hideKeyboard(btn_search)
         }
     }
 
     private fun observerWeatherData(model: WeatherUI?) {
-        if (model != null) {
-            findNavController().navigate(
-                SearchCityFragmentDirections.actionSearchCityFragmentToWeatherDetailsFragment(model)
-            )
-            viewModel.setModel(null)
-        }
+        if (model == null) return
+        findNavController().navigate(
+            SearchCityFragmentDirections.actionSearchCityFragmentToWeatherDetailsFragment(model)
+        )
+        viewModel.setModel(null)
     }
 
-    private fun observerError(visibility: Boolean?) {
-        if (visibility!!) {
+    private fun observerError(visibility: Boolean) {
+        if (visibility) {
             Toast.makeText(activity, "There was some error", Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun observerLoading(visibility: Boolean?) {
-        cl_progress_bar.visible = visibility!!
+    private fun observerLoading(visibility: Boolean) {
+        cl_progress_bar.isVisible = visibility
     }
 }

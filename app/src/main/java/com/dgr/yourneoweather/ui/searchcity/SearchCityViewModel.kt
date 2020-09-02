@@ -29,13 +29,13 @@ class SearchCityViewModel(
         viewModelScope.launch {
             mIsLoading.value = true
             val response = withContext(Dispatchers.IO) {
-                getWeatherUseCase.invoke(cityName)
+                getWeatherUseCase(cityName)
             }
             response.also {
                 mIsLoading.value = false
                 mIsError.value = it == null
                 if (it != null) {
-                    mWeatherData.value = modelMapper.toUIModel(it)
+                    mWeatherData.value = checkNotNull(modelMapper.toUIModel(it))
                 }
             }
         }

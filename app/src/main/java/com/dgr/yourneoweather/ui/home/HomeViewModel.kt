@@ -28,7 +28,7 @@ class HomeViewModel(
         viewModelScope.launch {
             mIsLoading.value = true
             val response = withContext(Dispatchers.IO) {
-                getCitiesUseCase.invoke()
+                getCitiesUseCase()
             }
 
             response.also {

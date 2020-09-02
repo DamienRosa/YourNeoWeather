@@ -20,7 +20,7 @@ interface OpenWeatherApi {
 
     companion object {
 
-        private const val BASE_API_URL: String = "http://api.openweathermap.org/data/2.5/"
+        private const val BASE_API_URL: String = "https://api.openweathermap.org/data/2.5/"
 
         operator fun invoke(networkConnectionInterceptor: NetworkConnectionInterceptor): OpenWeatherApi {
             val interceptor = HttpLoggingInterceptor()

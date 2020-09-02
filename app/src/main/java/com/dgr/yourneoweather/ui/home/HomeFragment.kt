@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dgr.yourneoweather.R
@@ -12,7 +13,6 @@ import com.dgr.yourneoweather.common.extensions.observe
 import com.dgr.yourneoweather.common.ui.BaseFragment
 import com.dgr.yourneoweather.model.WeatherUI
 import com.google.android.material.snackbar.Snackbar
-import com.pawegio.kandroid.visible
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.layout_progress_bar.*
 import org.kodein.di.generic.instance
@@ -53,23 +53,32 @@ class HomeFragment : BaseFragment() {
         }
     }
 
-    private fun observerCitiesList(cities: List<WeatherUI>?) {
+    private fun observerCitiesList(cities: List<WeatherUI>) {
         if (cities.isNullOrEmpty()) {
-            Snackbar.make(view!!, "", Snackbar.LENGTH_SHORT)
+            Snackbar.make(requireView(), "", Snackbar.LENGTH_SHORT)
         } else {
-            cAdapter.setCityList(cities)
+            cAdapter.apply {
+                setCityList(cities)
+                onSelectedCity = { city ->
+                    navigateToWeatherDetails(city)
+                }
+            }
         }
     }
 
-    private fun observerEmptyList(visibility: Boolean?) {
-        ll_messaging_container.visible = visibility ?: false
+    private fun observerEmptyList(visibility: Boolean) {
+        ll_messaging_container.isVisible = visibility
     }
 
-    private fun observerProgressBar(visibility: Boolean?) {
-        cl_progress_bar.visible = visibility ?: false
+    private fun observerProgressBar(visibility: Boolean) {
+        cl_progress_bar.isVisible = visibility
     }
 
     private fun navigateToAddCity() {
         findNavController().navigate(HomeFragmentDirections.actionMenuHomeToSearchCityFragment())
+    }
+
+    private fun navigateToWeatherDetails(city: WeatherUI) {
+        findNavController().navigate(HomeFragmentDirections.actionMenuHomeToWeatherDetailsFragment(city))
     }
 }
