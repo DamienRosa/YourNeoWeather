@@ -11,9 +11,7 @@ import kotlin.math.roundToInt
 class WeatherUIModelMapper {
 
     fun toUIModel(domainList: List<WeatherDomain>): List<WeatherUI> =
-        domainList.map {
-            toUIModel(it)
-        }
+        domainList.map { toUIModel(it) }
 
     fun toUIModel(weatherDomain: WeatherDomain): WeatherUI =
         WeatherUI(

@@ -3,17 +3,23 @@ package com.dgr.data.repository
 import com.dgr.data.db.WeatherAppDataBase
 import com.dgr.data.db.entity.CityEntity
 import com.dgr.domain.entity.WeatherDomain
+import com.dgr.domain.functional.Either
+import com.dgr.domain.functional.FailureBo
 import com.dgr.domain.repository.CityDataSource
 
-class CityWeatherDataRepository(private val dataBase: WeatherAppDataBase) : CityDataSource {
+class CityWeatherDataRepository(
+    private val dataBase: WeatherAppDataBase
+) : CityDataSource {
 
-    override suspend fun getCities(): List<WeatherDomain> {
-        val response = dataBase.getCityDao().getCities()
-        return response.toDomainModel()
-    }
+    override suspend fun getCities(): Either<FailureBo, List<WeatherDomain>> =
+        safeDbCall(
+            { dataBase.getCityDao().getCities() },
+            { it.toDomainModel() }
+        )
 
-    override suspend fun addCity(city: WeatherDomain) {
+    override suspend fun addCity(city: WeatherDomain) : Either<FailureBo, Unit> {
         dataBase.getCityDao().addCity(city.toDbModel())
+        return Either.Right(Unit)
     }
 
     override suspend fun removeCity(city: WeatherDomain) {

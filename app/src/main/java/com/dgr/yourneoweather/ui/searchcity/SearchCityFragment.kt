@@ -44,6 +44,7 @@ class SearchCityFragment : BaseFragment() {
 
     private fun observerWeatherData(model: WeatherUI?) {
         if (model == null) return
+        et_city_name.text?.clear()
         findNavController().navigate(
             SearchCityFragmentDirections.actionSearchCityFragmentToWeatherDetailsFragment(model)
         )

@@ -66,7 +66,7 @@ class WeatherAppApplication : Application(), KodeinAware {
         }
 
         bind<WeatherDetailsViewModel>() with scoped<Fragment>(AndroidLifecycleScope).singleton {
-            BaseViewModelProvider.of(context) { WeatherDetailsViewModel(instance(), instance()) }
+            BaseViewModelProvider.of(context) { WeatherDetailsViewModel(instance(), instance(), instance()) }
         }
     }
 }

@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.dgr.domain.entity.WeatherDomain
+import com.dgr.domain.functional.FailureBo
 import com.dgr.domain.usecase.GetWeatherUseCase
 import com.dgr.yourneoweather.mapper.WeatherUIModelMapper
 import com.dgr.yourneoweather.model.WeatherUI
@@ -28,17 +30,20 @@ class SearchCityViewModel(
     fun getWeather(cityName: String) {
         viewModelScope.launch {
             mIsLoading.value = true
-            val response = withContext(Dispatchers.IO) {
+            withContext(Dispatchers.IO) {
                 getWeatherUseCase(cityName)
-            }
-            response.also {
-                mIsLoading.value = false
-                mIsError.value = it == null
-                if (it != null) {
-                    mWeatherData.value = checkNotNull(modelMapper.toUIModel(it))
-                }
-            }
+            }.fold(::handleFailure, ::handleSuccess)
         }
+    }
+
+    private fun handleSuccess(weatherDomain: WeatherDomain) {
+        mIsLoading.value = false
+        mWeatherData.value = modelMapper.toUIModel(weatherDomain)
+    }
+
+    private fun handleFailure(failureBo: FailureBo) {
+        mIsLoading.value = false
+        mIsError.postValue(true)
     }
 
     fun setModel(weatherUi: WeatherUI?) {

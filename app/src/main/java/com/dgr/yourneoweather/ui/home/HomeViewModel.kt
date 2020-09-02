@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.dgr.domain.entity.WeatherDomain
+import com.dgr.domain.functional.FailureBo
 import com.dgr.domain.usecase.GetCitiesUseCase
 import com.dgr.yourneoweather.mapper.WeatherUIModelMapper
 import com.dgr.yourneoweather.model.WeatherUI
@@ -27,15 +29,22 @@ class HomeViewModel(
     fun loadData() {
         viewModelScope.launch {
             mIsLoading.value = true
-            val response = withContext(Dispatchers.IO) {
+            withContext(Dispatchers.IO) {
                 getCitiesUseCase()
-            }
-
-            response.also {
-                mIsLoading.value = false
-                mIsEmpty.value = it.isNullOrEmpty()
-                mCityList.value = if (it.isNotEmpty()) modelMapper.toUIModel(it) else emptyList()
-            }
+            }.fold(::handleFailure, ::handleSuccess)
         }
+    }
+
+    private fun handleSuccess(weatherList: List<WeatherDomain>) {
+        mIsLoading.postValue(false)
+        mIsEmpty.postValue(weatherList.isNullOrEmpty())
+        mCityList.postValue(modelMapper.toUIModel(weatherList))
+    }
+
+
+    private fun handleFailure(failure: FailureBo) {
+        mIsLoading.value = false
+        mIsEmpty.postValue(true)
+        mCityList.postValue(emptyList())
     }
 }
