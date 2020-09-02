@@ -3,7 +3,6 @@ package com.dgr.yourneoweather.common.ui
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 
 class BaseViewModelProvider private constructor() {
     companion object {
@@ -14,7 +13,7 @@ class BaseViewModelProvider private constructor() {
                 override fun <U : ViewModel> create(modelClass: Class<U>): U = factory() as U
             }
 
-            return ViewModelProviders.of(fragment, vmFactory)[T::class.java]
+            return ViewModelProvider(fragment, vmFactory)[T::class.java]
         }
     }
 }

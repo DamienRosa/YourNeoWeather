@@ -43,7 +43,7 @@ internal class CityAdapter(private val mapper: WeatherUIModelMapper) : RecyclerV
             itemView.tv_humidity.text = context.resources.getString(R.string.ui_humidity, city.humidity)
             itemView.tv_last_update_date.text = context.resources.getString(R.string.ui_last_update_date, city.lastUpdateDate)
 
-            val cardinalImage = map.cardinalDirectionToImage(city.windDirection!!)
+            val cardinalImage = map.cardinalDirectionToImage(city.windDirection)
             itemView.iv_wind_direction.setBackgroundResource(cardinalImage)
 
             val weatherImage = map.iconIdToImage(city.weatherIcon ?: -1)
