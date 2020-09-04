@@ -9,7 +9,9 @@ import com.dgr.yourneoweather.mapper.WeatherUIModelMapper
 import com.dgr.yourneoweather.model.WeatherUI
 import kotlinx.android.synthetic.main.layout_item_city.view.*
 
-class CityAdapter(private val mapper: WeatherUIModelMapper) : RecyclerView.Adapter<CityAdapter.CityViewHolder>() {
+class CityAdapter(
+    private val mapper: WeatherUIModelMapper
+) : RecyclerView.Adapter<CityAdapter.CityViewHolder>() {
 
     private var cityList: List<WeatherUI> = emptyList()
 
@@ -52,5 +54,12 @@ class CityAdapter(private val mapper: WeatherUIModelMapper) : RecyclerView.Adapt
     fun setCityList(list: List<WeatherUI>) {
         cityList = list
         notifyDataSetChanged()
+    }
+
+    /*
+    * Function that swaps two items
+    */
+    fun swapItems(fromPosition: Int, toPosition: Int) {
+        notifyItemMoved(fromPosition, toPosition)
     }
 }

@@ -14,7 +14,6 @@ import com.dgr.yourneoweather.common.extensions.observe
 import com.dgr.yourneoweather.common.ui.BaseFragment
 import com.dgr.yourneoweather.common.ui.DragAndDropManager
 import com.dgr.yourneoweather.model.WeatherUI
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.layout_progress_bar.*
 import org.kodein.di.generic.instance
@@ -47,13 +46,13 @@ class HomeFragment : BaseFragment() {
             setHasFixedSize(true)
             adapter = cAdapter
         }
-        val dragAndDropManager = DragAndDropManager(
-            cAdapter,
-            requireContext(),
-            ItemTouchHelper.UP.or(ItemTouchHelper.DOWN),
-            -1
-        )
-        ItemTouchHelper(dragAndDropManager).attachToRecyclerView(rv_cities)
+        ItemTouchHelper(
+            DragAndDropManager(
+                cAdapter,
+                ItemTouchHelper.UP.or(ItemTouchHelper.DOWN),
+                ItemTouchHelper.ACTION_STATE_IDLE
+            )
+        ).attachToRecyclerView(rv_cities)
     }
 
     private fun setupFabButton() {
@@ -63,14 +62,10 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun observerCitiesList(cities: List<WeatherUI>) {
-        if (cities.isNullOrEmpty()) {
-            Snackbar.make(requireView(), "", Snackbar.LENGTH_SHORT)
-        } else {
-            cAdapter.apply {
-                setCityList(cities)
-                onSelectedCity = { city ->
-                    navigateToWeatherDetails(city)
-                }
+        cAdapter.apply {
+            setCityList(cities)
+            onSelectedCity = { city ->
+                navigateToWeatherDetails(city)
             }
         }
     }
