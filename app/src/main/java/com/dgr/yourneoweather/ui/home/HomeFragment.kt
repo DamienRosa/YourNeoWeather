@@ -6,11 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dgr.yourneoweather.R
 import com.dgr.yourneoweather.adapter.CityAdapter
 import com.dgr.yourneoweather.common.extensions.observe
 import com.dgr.yourneoweather.common.ui.BaseFragment
+import com.dgr.yourneoweather.common.ui.DragAndDropManager
 import com.dgr.yourneoweather.model.WeatherUI
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -45,6 +47,13 @@ class HomeFragment : BaseFragment() {
             setHasFixedSize(true)
             adapter = cAdapter
         }
+        val dragAndDropManager = DragAndDropManager(
+            cAdapter,
+            requireContext(),
+            ItemTouchHelper.UP.or(ItemTouchHelper.DOWN),
+            -1
+        )
+        ItemTouchHelper(dragAndDropManager).attachToRecyclerView(rv_cities)
     }
 
     private fun setupFabButton() {
