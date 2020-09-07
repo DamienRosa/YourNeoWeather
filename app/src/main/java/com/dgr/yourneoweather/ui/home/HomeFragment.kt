@@ -50,7 +50,7 @@ class HomeFragment : BaseFragment() {
             DragAndDropManager(
                 cAdapter,
                 ItemTouchHelper.UP.or(ItemTouchHelper.DOWN),
-                ItemTouchHelper.ACTION_STATE_IDLE
+                ItemTouchHelper.LEFT
             )
         ).attachToRecyclerView(rv_cities)
     }

@@ -8,6 +8,7 @@ import com.dgr.yourneoweather.R
 import com.dgr.yourneoweather.mapper.WeatherUIModelMapper
 import com.dgr.yourneoweather.model.WeatherUI
 import kotlinx.android.synthetic.main.layout_item_city.view.*
+import java.text.FieldPosition
 
 class CityAdapter(
     private val mapper: WeatherUIModelMapper
@@ -61,5 +62,10 @@ class CityAdapter(
     */
     fun swapItems(fromPosition: Int, toPosition: Int) {
         notifyItemMoved(fromPosition, toPosition)
+    }
+
+    fun removeItem(removedPosition: Int) {
+        (cityList as ArrayList).removeAt(removedPosition)
+        notifyItemRemoved(removedPosition)
     }
 }

@@ -14,6 +14,6 @@ class DragAndDropManager(
         adapter.swapItems(viewHolder.adapterPosition, target.adapterPosition).let { true }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-        // Do Nothing
+        adapter.removeItem(viewHolder.adapterPosition)
     }
 }
